@@ -1,5 +1,6 @@
 package br.com.nata.services;
 
+import br.com.nata.data.dto.PersonDTO;
 import br.com.nata.exception.ResourceNotFoundException;
 import br.com.nata.model.Person;
 import br.com.nata.repository.PersonRepository;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
+import static br.com.nata.mapper.ObjectMapper.parseListObject;
+import static br.com.nata.mapper.ObjectMapper.parseObject;
 
 
 @Service
@@ -22,30 +25,30 @@ public class PersonServices {
 
 
 
-    public List<Person> findAll(){
-        return repository.findAll();
+    public List<PersonDTO> findAll(){
+        return parseListObject(repository.findAll(),PersonDTO.class);
     }
 
 
 
 
-    public Person findById(Long id){
+    public PersonDTO findById(Long id){
         logger.info("Finding one Person! ");
 
-        return repository.findById(id)
+        var entity = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this id"));
-
+        return parseObject(entity,PersonDTO.class);
     }
 
-    public Person create(Person person){
+    public PersonDTO create(PersonDTO person){
 
         logger.info("Creating one Person! ");
 
-
-        return repository.save(person);
+        var entity = parseObject(person,Person.class);
+        return parseObject(repository.save(entity), PersonDTO.class);
     }
 
-    public Person update(Person person){
+    public PersonDTO update(PersonDTO person){
 
         logger.info("Updating one Person! ");
 
@@ -57,7 +60,7 @@ public class PersonServices {
         entity.setAddress(person.getAddress());
         entity.setGender(person.getGender());
 
-        return repository.save(entity);
+        return parseObject(repository.save(entity), PersonDTO.class);
     }
 
     public void delete(Long id){

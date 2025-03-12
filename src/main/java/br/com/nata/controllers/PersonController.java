@@ -1,6 +1,7 @@
 package br.com.nata.controllers;
 
 
+import br.com.nata.data.dto.PersonDTO;
 import br.com.nata.services.PersonServices;
 import br.com.nata.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +20,14 @@ public class PersonController {
     private PersonServices services;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Person> findAll(){
+    public List<PersonDTO> findAll(){
         return services.findAll();
     }
 
 
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Person findById(@PathVariable("id") Long id){
+    public PersonDTO findById(@PathVariable("id") Long id){
        return services.findById(id);
     }
 
@@ -34,7 +35,7 @@ public class PersonController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE // Que produz uma aplicação com valor Json
     )
-    public Person create(@RequestBody Person person){
+    public PersonDTO create(@RequestBody PersonDTO person){
        return services.create(person);
     }
 
@@ -42,7 +43,7 @@ public class PersonController {
         consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE // Que produz uma aplicação com valor Json
     )
-    public Person update(@RequestBody Person person){
+    public PersonDTO update(@RequestBody PersonDTO person){
        return services.update(person);
     }
 
