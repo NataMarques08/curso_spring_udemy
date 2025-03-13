@@ -1,9 +1,9 @@
 package br.com.nata.controllers;
 
 
-import br.com.nata.data.dto.PersonDTO;
+import br.com.nata.data.dto.v1.PersonDTO;
+import br.com.nata.data.dto.v2.PersonDTOV2;
 import br.com.nata.services.PersonServices;
-import br.com.nata.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -32,11 +32,12 @@ public class PersonController {
     }
 
     @PostMapping(
+            value = "/v2",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE // Que produz uma aplicação com valor Json
     )
-    public PersonDTO create(@RequestBody PersonDTO person){
-       return services.create(person);
+    public PersonDTOV2 createV2(@RequestBody PersonDTOV2 person){
+       return services.createV2(person);
     }
 
   @PutMapping(

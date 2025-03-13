@@ -3,7 +3,7 @@ package br.com.nata.unitetests.mapper.mocks;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.nata.data.dto.PersonDTO;
+import br.com.nata.data.dto.v1.PersonDTO;
 import br.com.nata.model.Person;
 
 public class MockPerson {
