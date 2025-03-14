@@ -45,7 +45,7 @@ public class PersonServices {
         return parseObject(entity,PersonDTO.class);
     }
 
-    public PersonDTO createV2(PersonDTO person){
+    public PersonDTO create(PersonDTO person){
 
         logger.info("Creating one Person! ");
         var entity = parseObject(person, Person.class);

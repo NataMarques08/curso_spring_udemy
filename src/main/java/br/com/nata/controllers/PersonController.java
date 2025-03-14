@@ -13,7 +13,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/person")
+@RequestMapping("/api/test/1")
 public class PersonController {
 
     @Autowired // Injeta o service
@@ -32,13 +32,14 @@ public class PersonController {
     }
 
     @PostMapping(
-            value = "/v2",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE // Que produz uma aplicação com valor Json
     )
-    public PersonDTOV2 createV2(@RequestBody PersonDTOV2 person){
-       return services.createV2(person);
+    public PersonDTO create(@RequestBody PersonDTO person){
+        return services.create(person);
     }
+
+
 
   @PutMapping(
         consumes = MediaType.APPLICATION_JSON_VALUE,
