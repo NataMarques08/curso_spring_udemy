@@ -10,7 +10,8 @@ INSERT INTO `person` VALUES
 (10,'Belo Horizonte','Nelson','Male','Oliveira'),
 (11,'Florianópolis-SC','Nelson','Male','Barboza'),
 (12,'Joinville-SC','Andreia','Female','Camilly'),
-(13,'Mauá-SP','Flávia','Female','Mello'),
+(13,'Mauá-SP','Flávia','Female','Mello')
+/*
 (14, 'Belo Horizonte-MG', 'Ricardo', 'Male', 'Barbosa'),
 (15, 'Rio de Janeiro-RJ', 'Fernanda', 'Female', 'Rodrigues'),
 (16, 'Belo Horizonte-MG', 'Camila', 'Female', 'Rodrigues'),
@@ -510,4 +511,4 @@ INSERT INTO `person` VALUES
 (510, 'Rio de Janeiro-RJ', 'Maria', 'Female', 'Costa'),
 (511, 'Brasília-DF', 'Maria', 'Female', 'Souza'),
 (512, 'Recife-PE', 'Beatriz', 'Female', 'Martins'),
-(513, 'São Paulo-SP', 'Gustavo', 'Male', 'Costa');
+(513, 'São Paulo-SP', 'Gustavo', 'Male', 'Costa')*/;
