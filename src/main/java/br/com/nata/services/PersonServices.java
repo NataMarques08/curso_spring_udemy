@@ -1,5 +1,6 @@
 package br.com.nata.services;
 
+import br.com.nata.controllers.PersonController;
 import br.com.nata.data.dto.v1.PersonDTO;
 import br.com.nata.data.dto.v2.PersonDTOV2;
 import br.com.nata.exception.ResourceNotFoundException;
@@ -14,7 +15,8 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 import static br.com.nata.mapper.ObjectMapper.parseListObject;
 import static br.com.nata.mapper.ObjectMapper.parseObject;
-
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Service
 public class PersonServices {
@@ -42,8 +44,15 @@ public class PersonServices {
 
         var entity = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this id"));
-        return parseObject(entity,PersonDTO.class);
+        var dto = parseObject(entity,PersonDTO.class);
+        addHateoasLinks(id, dto);
+        return dto;
     }
+
+
+
+
+  
 
     public PersonDTO create(PersonDTO person){
 
@@ -81,6 +90,26 @@ public class PersonServices {
         Person entity = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this id"));
         repository.delete(entity);
+    }
+
+    private static void addHateoasLinks(Long id, PersonDTO dto) {
+        dto.add(linkTo(methodOn(PersonController.class).findById(id))
+        .withSelfRel()
+        .withType("GET"));
+        dto.add(linkTo(methodOn(PersonController.class).findAll())
+        .withRel("findAll")
+        .withType("GET"));
+        dto.add(linkTo(methodOn(PersonController.class).create(dto))
+        .withRel("create")
+        .withType("POST"));
+        dto.add(linkTo(methodOn(PersonController.class).update(dto))
+        .withRel("update")
+        .withType("PUT"));
+        dto.add(linkTo(methodOn(PersonController.class).delete(id))
+        .withRel( "delete")
+        .withType("DELETE"));
+        
+        
     }
 
 }
