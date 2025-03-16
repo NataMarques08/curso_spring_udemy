@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/api/person/v1")
 @Tag(name = "Person Endpoint",description = "Endpoint for managing people ")
@@ -78,6 +77,7 @@ public class PersonController {
             @ApiResponse(description = "Internal Server Error", responseCode = "500",content = @Content),
         }, 
         description = "Find a specific person")
+    @CrossOrigin(origins = "http://localhost:8080")
     public PersonDTO findById(@PathVariable("id") Long id){
         var person = services.findById(id);
         person.setBirthDay(new Date());
@@ -95,6 +95,7 @@ public class PersonController {
 
  // Que produz uma aplicação com valor Json
     )
+    @CrossOrigin(origins = "http://localhost:8080")
     public PersonDTO create(@RequestBody PersonDTO person){
         return services.create(person);
     }
